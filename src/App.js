@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react';
+import Header from './components/Header';
+import Formulario from './components/Formulario';
+import ListadoOperaciones from './components/ListadoOperaciones';
+
+
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import OperacionesState  from './context/operacionesState';
+
+//import AlertaState from './context/alertas/alertaState';
+
 
 function App() {
+
+  console.log(process.env.REACT_APP_BACKEND_URL);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <OperacionesState>
+        <Router>
+          {/* <Switch> */}
+            
+            {/* <Route exact path="/nueva-categoria" component={Formulario}/> */}
+            
+            <Header 
+                titulo = 'Control de Presupuesto'
+            />
+
+            <div className="container white">
+              <Formulario
+                  //guardarCategoria = {guardarCategoria}
+              />
+              <ListadoOperaciones
+              //operaciones = {operaciones}
+              />
+            </div>
+            {/* </Switch> */}
+          </Router>
+        </OperacionesState> 
+    </Fragment>
   );
 }
 
