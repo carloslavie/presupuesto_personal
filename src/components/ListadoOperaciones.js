@@ -8,9 +8,11 @@ const ListadoOperaciones = () => {
     const operacionContext = useContext(operacionesContext);
     const {operacion, operaciones, obtenerOperaciones } = operacionContext;
 
-    obtenerOperaciones();
-
-    console.log(operacion);
+    useEffect(() => {
+        
+        obtenerOperaciones();
+        
+    }, [operacion])
 
     return ( 
         <>

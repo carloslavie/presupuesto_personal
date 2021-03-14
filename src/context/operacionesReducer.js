@@ -23,18 +23,18 @@ export default (state,action) => {
         case OPERACION_ACTUAL :
             return {
                 ...state,
-                libroSeleccionado : action.payload
+                operacionSeleccionada : action.payload
             }
             case BORRAR_OPERACIONES :
             return {
                 ...state,
-                libros: state.libros.filter(libro => libro.id !== action.payload),
-                libro: null, 
+                operaciones: state.operaciones.filter(operacion => operacion.id !== action.payload),
+                operacion: null, 
             }
         case EDITAR_OPERACIONES :
             return {
                 ...state,
-                libros : state.libros.map(libro => libro.id === action.payload)
+                operaciones : state.operaciones.map(operacion => operacion.id === action.payload)
             }
         case ERROR_OPERACIONES:
             return {

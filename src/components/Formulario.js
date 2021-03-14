@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect} from 'react';
+import operacionesContext from '../context/operacionesContext'
+
 
 const Formulario = () => {
 
+    const operacionContext = useContext(operacionesContext);
+    const { agregarOperacion } = operacionContext;
 
     const [ operacion, guardarOperacion ] = useState({
         concepto : "",
         monto : 0,
+        fecha: null,
         tipo: ""
 
     });
@@ -14,21 +19,29 @@ const Formulario = () => {
     const handleonChange = e =>{
         guardarOperacion ({
             ...operacion,
-            [e.target.name] : e.target.value
+            [e.target.name] : e.target.value,
+            
         })
     }
-    
-        
+            
     const { concepto, monto, tipo } = operacion;
 
+    
+   
 
-    //Al realizar operacion
-    const handleOnSubmit = e =>{
-        e.preventDefault();
+ //Al realizar operacion
+ const handleOnSubmit = e =>{
+    e.preventDefault();
+    
+    agregarOperacion(operacion)
 
-
-    }
-
+    guardarOperacion({
+        concepto : "",
+        monto : 0,
+        fecha: null,
+        tipo: ""
+    })
+}
     
     return ( 
         <form
