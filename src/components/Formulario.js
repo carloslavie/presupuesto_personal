@@ -78,7 +78,7 @@ const Formulario = () => {
             <select 
                 className="browser-default"
                 name= "tipo"
-                value=""
+                value= {tipo}
                 onChange= {handleonChange}
             >
                 <option value="">Seleccione</option>
