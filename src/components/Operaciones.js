@@ -122,7 +122,7 @@ const Operaciones = ({operation}) => {
                         type = "text"
                         name = "monto"
                         className = "u-full-width"
-                        placeholder = "Ej. Transporte"
+                        placeholder = "Ej. 300"
                         onChange = {actualizarEdicion}
                       />
                   </div>

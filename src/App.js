@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Header from './components/Header';
 import Formulario from './components/Formulario';
+import Balance from './components/Balance';
 import ListadoOperaciones from './components/ListadoOperaciones';
 
 
@@ -33,6 +34,7 @@ function App() {
               <ListadoOperaciones
               //operaciones = {operaciones}
               />
+              <Balance/>
             </div>
             {/* </Switch> */}
           </Router>

@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect} from 'react';
-import operacionesContext from '../context/operacionesContext'
+import operacionesContext from '../context/operacionesContext';
+import Error from '../components/Error'
 
 
 const Formulario = () => {
@@ -9,17 +10,25 @@ const Formulario = () => {
 
     const [ operacion, guardarOperacion ] = useState({
         concepto : "",
-        monto : 0,
+        monto : 0.00,
         fecha: null,
         tipo: ""
 
     });
-    
-        
+
+    const [ error, actualizarError ] = useState(false)
+               
     const handleonChange = e =>{
         guardarOperacion ({
             ...operacion,
             [e.target.name] : e.target.value,
+            
+        })
+    }
+    const handleonMonto = e =>{
+        guardarOperacion ({
+            ...operacion,
+            [e.target.name] : parseInt(e.target.value, 10),
             
         })
     }
@@ -29,27 +38,35 @@ const Formulario = () => {
     
    
 
- //Al realizar operacion
- const handleOnSubmit = e =>{
-    e.preventDefault();
-    
-    agregarOperacion(operacion)
+    //Al realizar operacion
+    const handleOnSubmit = e =>{
+        e.preventDefault();
+        if(concepto.trim() === "" || monto <= 0 || tipo === ""){
+            actualizarError(true);
+            return;
+        }
+        actualizarError(false)
+        agregarOperacion(operacion)
+        
+        guardarOperacion({
+            concepto : "",
+            monto : 0,
+            fecha: null,
+            tipo: ""
+            })
+        }
+        // useEffect(() => {
+            
+        // }, [operacion])
+        
 
-    guardarOperacion({
-        concepto : "",
-        monto : 0,
-        fecha: null,
-        tipo: ""
-    })
-}
-    
     return ( 
         <form
             onSubmit = {handleOnSubmit}
         >
-            <h2>Ingrese Operación</h2>
+            <h3>Ingrese Operación</h3>
 
-            {/* { error ? <Error mensaje="Ambos campos son obligatorios"/> : null } */}
+            { error ? <Error mensaje="Los campos son obligatorios"/> : null } 
 
             <div className = "">
                 <label>Concepto</label>
@@ -67,11 +84,12 @@ const Formulario = () => {
                 <label>Monto</label>
                 <input 
                     type = "number"
+                    //step="0.01"
                     name = "monto"
                     className = "u-full-width"
                     placeholder = "Ej. 300"
                     value = {monto}
-                    onChange = {handleonChange}
+                    onChange = {handleonMonto}
                 />
             </div>
             <div>
@@ -82,16 +100,18 @@ const Formulario = () => {
                 onChange= {handleonChange}
             >
                 <option value="">Seleccione</option>
-                <option value="ingreso">Ingreso</option>
-                <option value="egreso">Egreso</option>                
+                <option value="INGRESO">Ingreso</option>
+                <option value="EGRESO">Egreso</option>                
             </select>
             </div>
-
+            <div className="button">
                 <input
                     type = "submit"
-                    className = "button-primary u-full-width"
+                    className = "waves-effect waves-light btn-small btn-block #0277bd light-blue darken-3 accent-4"
                     value = "Guardar Operación"
                 />
+            </div>
+               
         </form>
      );
 }

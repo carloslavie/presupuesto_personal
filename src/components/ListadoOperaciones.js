@@ -9,14 +9,15 @@ const ListadoOperaciones = () => {
     const {operacion, operaciones, obtenerOperaciones } = operacionContext;
 
     useEffect(() => {
-        
         obtenerOperaciones();
         
+        
     }, [operacion])
-
+    
+    
     return ( 
         <>
-            <h1 className="">Listado de operaciones</h1>
+            <h3 className="">Listado de operaciones</h3>
             <table className="">
                 <thead className="">
                     <tr>

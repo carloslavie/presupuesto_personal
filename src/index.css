@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+  
+  
+  .contenedor-form {
+    padding: 3rem 0 1px 0;
+    background-color: #03a9f4;
+  }
+  .mensaje {
+    text-align: center;
+    font-size: 2rem;
+  }
+  
+  .error {
+    padding: 1rem!important;
+    color:white;
+    margin-top: 3rem;
+    text-align: center;
+    text-emphasis: left;
+  }
+  
+  .error {
+    padding: 1rem!important;
+    text-align: center!important;
+    color: #FFF!important;
+  }
+
+  .button{
+      margin-top: 1rem;
+  }
