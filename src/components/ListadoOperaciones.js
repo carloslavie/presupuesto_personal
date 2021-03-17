@@ -1,20 +1,35 @@
 import React, {useContext, useEffect} from 'react';
 import Operaciones from './Operaciones';
-import operacionesContext from '../context/operacionesContext';
+import operacionesContext from '../context/operaciones/operacionesContext';
+
+import Balance from '../components/Balance';
 
 
-const ListadoOperaciones = () => {
+const ListadoOperaciones = ({traerOperaciones}) => {
 
     const operacionContext = useContext(operacionesContext);
     const {operacion, operaciones, obtenerOperaciones } = operacionContext;
-
+    //console.log(operaciones)
     useEffect(() => {
-        obtenerOperaciones();
+        obtenerOperaciones();        
         
-        
-    }, [operacion])
+    }, [])
     
-    
+    traerOperaciones(operaciones)
+
+    //Para que liste solo los ultimos 10
+    let operacionesDos = [];
+    if(operaciones.length<10){
+        for(let i=0;i< operaciones.length;i++){
+            operacionesDos.push(operaciones[i])
+        }
+    }
+    else {
+    for(let i=0; i<10;i++){
+        operacionesDos.push(operaciones[i])
+    }
+}
+    //console.log(operacionesDos)
     return ( 
         <>
             <h3 className="">Listado de operaciones</h3>
@@ -29,13 +44,16 @@ const ListadoOperaciones = () => {
                         <th>Eliminar</th>                        
                     </tr>
                 </thead>
-                {operaciones.map(operation => (
+                {operacionesDos.map(operation => (
                     <Operaciones
                         key = {operation.id}
                         operation = {operation}  
                     />
                 ))}
             </table>
+            {/* <Balance
+            operaciones = {operaciones}
+            /> */}
         </>
      );
 }

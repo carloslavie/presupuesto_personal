@@ -1,13 +1,17 @@
 import React, { useState, useContext, useEffect} from 'react';
-import operacionesContext from '../context/operacionesContext';
-import Error from '../components/Error'
+import operacionesContext from '../context/operaciones/operacionesContext';
+import Error from '../components/Error';
+import Balance from './Balance'
 
 
-const Formulario = () => {
+
+
+const Formulario = ({nuevoBalance}) => {
 
     const operacionContext = useContext(operacionesContext);
     const { agregarOperacion } = operacionContext;
 
+    
     const [ operacion, guardarOperacion ] = useState({
         concepto : "",
         monto : 0.00,
@@ -41,10 +45,16 @@ const Formulario = () => {
     //Al realizar operacion
     const handleOnSubmit = e =>{
         e.preventDefault();
+        let titerr = ""
         if(concepto.trim() === "" || monto <= 0 || tipo === ""){
+            titerr = "Campos obligatorios"
             actualizarError(true);
             return;
         }
+        if(tipo === "EGRESO" && monto > nuevoBalance){
+            actualizarError(true);
+             return;
+         }
         actualizarError(false)
         agregarOperacion(operacion)
         
@@ -66,7 +76,7 @@ const Formulario = () => {
         >
             <h3>Ingrese Operación</h3>
 
-            { error ? <Error mensaje="Los campos son obligatorios"/> : null } 
+            { error ? <Error mensaje={"Los campos son obligatorios o el egreso es mayor al Balance"}/> : null } 
 
             <div className = "">
                 <label>Concepto</label>
@@ -107,7 +117,7 @@ const Formulario = () => {
             <div className="button">
                 <input
                     type = "submit"
-                    className = "waves-effect waves-light btn-small btn-block #0277bd light-blue darken-3 accent-4"
+                    className = "btn waves-effect waves-light btn-small btn-block #0277bd light-blue darken-3 accent-4"
                     value = "Guardar Operación"
                 />
             </div>

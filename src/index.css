@@ -6,8 +6,8 @@ body {
   
   
   .contenedor-form {
-    padding: 3rem 0 1px 0;
-    background-color: #03a9f4;
+    padding: 1px 0 1px 0;
+    background-color: #FFF;
   }
   .mensaje {
     text-align: center;
@@ -31,3 +31,17 @@ body {
   .button{
       margin-top: 1rem;
   }
+
+  .balance{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 1rem;
+    margin-bottom: 4rem;
+    
+  }
+  /* .balancetop{
+    text-align: right;
+    font-weight: bold;
+    margin-bottom: 4rem;
+    font-size: 20px;
+  } */

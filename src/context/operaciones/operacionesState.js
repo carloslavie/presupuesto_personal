@@ -8,8 +8,8 @@ import {
     BORRAR_OPERACIONES,
     OPERACION_ACTUAL,
     ERROR_OPERACIONES
-} from '../types';
-import clienteAxios from '../config/axios';
+} from '../../types';
+import clienteAxios from '../../config/axios';
 
 const OperacionesState = (props) => {
     const initialState = {

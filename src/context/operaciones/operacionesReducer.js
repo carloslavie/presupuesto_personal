@@ -5,7 +5,7 @@ import {
     BORRAR_OPERACIONES,
     OPERACION_ACTUAL,
     ERROR_OPERACIONES    
-} from '../types';
+} from '../../types';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state,action) => {
