@@ -81,40 +81,7 @@ const OperacionesState = (props) => {
             console.log(error);
         }
     }
-    // const devolverLibro = async libroId => {
-    //     try {
-    //         await clienteAxios.put(`/libro/devolver/${libroId}`);
-    //         dispatch({
-    //             type: DEVOLVER_LIBRO,
-    //             payload: null,
-    //         })
-    //     } catch (error) {
-    //         console.log(error);
-    //         dispatch({
-    //             type: ERROR_LIBRO,
-    //             payload: error.response.data.Error
-    //         })
-    //     }
-    // }
-    // const prestarLibro = async libro => {
-    //     try {
-    //         const contenido = await clienteAxios.put(`/libro/prestar/${libro.id}`, libro);
-    //         dispatch({
-    //             type: PRESTAR_LIBRO,
-    //             payload: contenido.data.libro
-    //         })
-    //     } catch (error) {
-    //         dispatch({
-    //             type: ERROR_LIBRO,
-    //             payload: error.response.data.Error
-    //         })
-    //     }
-    // }
-    // const libroSinDatos = () => {
-    //     dispatch({
-    //         type: LIBRO_SIN_DATOS
-    //     })
-    // }
+    
   
     return (  
         <operacionesContext.Provider
@@ -128,9 +95,7 @@ const OperacionesState = (props) => {
                 operacionActual,
                 eliminarOperacion,
                 actualizarOperaciones
-                // devolverLibro,
-                // prestarLibro,
-                // libroSinDatos
+                
             }}
         >
             {props.children}

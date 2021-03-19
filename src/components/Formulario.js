@@ -45,9 +45,8 @@ const Formulario = ({nuevoBalance}) => {
     //Al realizar operacion
     const handleOnSubmit = e =>{
         e.preventDefault();
-        let titerr = ""
+        
         if(concepto.trim() === "" || monto <= 0 || tipo === ""){
-            titerr = "Campos obligatorios"
             actualizarError(true);
             return;
         }
@@ -76,7 +75,7 @@ const Formulario = ({nuevoBalance}) => {
         >
             <h3>Ingrese Operación</h3>
 
-            { error ? <Error mensaje={"Los campos son obligatorios o el egreso es mayor al Balance"}/> : null } 
+            { error ? <Error mensaje="Los campos son obligatorios o el egreso es mayor al Balance"/> : null } 
 
             <div className = "">
                 <label>Concepto</label>

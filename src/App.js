@@ -1,11 +1,13 @@
 import React, { Fragment, useState } from 'react';
 import Header from './components/Header';
 import Formulario from './components/Formulario';
+import Login from './components/Login';
 import Balance from './components/Balance';
 import ListadoOperaciones from './components/ListadoOperaciones';
 
 import {BrowserRouter as Router  } from 'react-router-dom';
 import OperacionesState  from './context/operaciones/operacionesState';
+import AuthState  from './context/auth/authState';
 
 //import AlertaState from './context/alertas/alertaState';
 
@@ -28,17 +30,16 @@ function App() {
 
   return (
     <Fragment>
+      <AuthState>
       <OperacionesState>
         <Router>
-          {/* <Switch> */}
-            
-            {/* <Route exact path="/nueva-categoria" component={Formulario}/> */}
-            
+              
             <Header 
                 titulo = 'Control de Presupuesto'
             />
 
             <div className="container white">
+              <Login/>
               <Formulario
                  nuevoBalance = {nuevoBalance}
               />
@@ -51,9 +52,10 @@ function App() {
 
               />
             </div>
-            {/* </Switch> */}
+            
           </Router>
         </OperacionesState> 
+        </AuthState>
     </Fragment>
   );
 }
