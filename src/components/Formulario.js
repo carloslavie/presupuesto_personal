@@ -1,12 +1,14 @@
 import React, { useState, useContext, useEffect} from 'react';
-import operacionesContext from '../context/operacionesContext'
+import operacionesContext from '../context/operaciones/operacionesContext';
+import Error from '../components/Error';
 
 
-const Formulario = () => {
+const Formulario = ({nuevoBalance}) => {
 
     const operacionContext = useContext(operacionesContext);
     const { agregarOperacion } = operacionContext;
 
+    
     const [ operacion, guardarOperacion ] = useState({
         concepto : "",
         monto : 0,
@@ -14,42 +16,54 @@ const Formulario = () => {
         tipo: ""
 
     });
-    
-        
+
+    const [ error, actualizarError ] = useState(false)
+               
     const handleonChange = e =>{
         guardarOperacion ({
             ...operacion,
-            [e.target.name] : e.target.value,
-            
+            [e.target.name] : e.target.value,            
+        })
+    }
+    const handleonMonto = e =>{
+        guardarOperacion ({
+            ...operacion,
+            [e.target.name] : parseInt(e.target.value, 10),            
         })
     }
             
     const { concepto, monto, tipo } = operacion;
-
-    
-   
-
- //Al realizar operacion
- const handleOnSubmit = e =>{
-    e.preventDefault();
-    
-    agregarOperacion(operacion)
-
-    guardarOperacion({
-        concepto : "",
-        monto : 0,
-        fecha: null,
-        tipo: ""
-    })
-}
-    
+  
+    //Al cargar operacion
+    const handleOnSubmit = e =>{
+        e.preventDefault();
+        if(concepto.trim() === "" || monto <= 0 || tipo === ""){
+            actualizarError(true);
+            return;
+        }
+        if(tipo === "EGRESO" && monto > nuevoBalance){
+            actualizarError(true);
+             return;
+         }
+        actualizarError(false)
+        agregarOperacion(operacion)
+        
+        guardarOperacion({
+            concepto : "",
+            monto : 0,
+            fecha: null,
+            tipo: ""
+            })
+        }
     return ( 
         <form
             onSubmit = {handleOnSubmit}
         >
-            <h2>Ingrese Operación</h2>
+            <h3 className="subtitulos">Ingrese Operación</h3>
 
-            {/* { error ? <Error mensaje="Ambos campos son obligatorios"/> : null } */}
+            { error ? 
+            <Error mensaje="Los campos son obligatorios o el egreso es mayor al Balance"/> 
+            : null } 
 
             <div className = "">
                 <label>Concepto</label>
@@ -71,7 +85,7 @@ const Formulario = () => {
                     className = "u-full-width"
                     placeholder = "Ej. 300"
                     value = {monto}
-                    onChange = {handleonChange}
+                    onChange = {handleonMonto}
                 />
             </div>
             <div>
@@ -82,16 +96,18 @@ const Formulario = () => {
                 onChange= {handleonChange}
             >
                 <option value="">Seleccione</option>
-                <option value="ingreso">Ingreso</option>
-                <option value="egreso">Egreso</option>                
+                <option value="INGRESO">Ingreso</option>
+                <option value="EGRESO">Egreso</option>                
             </select>
             </div>
-
+            <div className="button">
                 <input
                     type = "submit"
-                    className = "button-primary u-full-width"
+                    className = "btn waves-effect waves-light btn-small btn-block #0277bd light-blue darken-3 accent-4"
                     value = "Guardar Operación"
                 />
+            </div>
+               
         </form>
      );
 }

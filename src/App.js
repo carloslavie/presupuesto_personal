@@ -1,42 +1,52 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import Header from './components/Header';
 import Formulario from './components/Formulario';
+import Balance from './components/Balance';
 import ListadoOperaciones from './components/ListadoOperaciones';
 
+import {BrowserRouter as Router  } from 'react-router-dom';
+import OperacionesState  from './context/operaciones/operacionesState';
 
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import OperacionesState  from './context/operacionesState';
 
-//import AlertaState from './context/alertas/alertaState';
 
 
 function App() {
 
   console.log(process.env.REACT_APP_BACKEND_URL);
 
+  const [ nuevoBalance, setnuevoBalance ] = useState();
+  const [ nuevoOperaciones, setnuevoOperaciones ] = useState([]);
+
+  //Funcion para traer balance del componente balance
+  const traerBalance = bal =>{
+    setnuevoBalance(bal)
+  }
+  //Funcion para traer operaciones del componente ListadoOperaciones
+  const traerOperaciones = oper =>{
+      setnuevoOperaciones(oper)
+  }
+
   return (
     <Fragment>
       <OperacionesState>
         <Router>
-          {/* <Switch> */}
-            
-            {/* <Route exact path="/nueva-categoria" component={Formulario}/> */}
-            
-            <Header 
-                titulo = 'Control de Presupuesto'
-            />
-
-            <div className="container white">
+          <Header 
+              titulo = 'Control de Presupuesto'
+          />
+              <div className="contenedorppal">
               <Formulario
-                  //guardarCategoria = {guardarCategoria}
+                  nuevoBalance = {nuevoBalance}
               />
               <ListadoOperaciones
-              //operaciones = {operaciones}
+                  traerOperaciones = {traerOperaciones}
               />
-            </div>
-            {/* </Switch> */}
-          </Router>
-        </OperacionesState> 
+              <Balance
+                  traerBalance = {traerBalance}
+                  nuevoOperaciones = {nuevoOperaciones}
+              />
+              </div>            
+        </Router>
+      </OperacionesState> 
     </Fragment>
   );
 }

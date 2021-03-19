@@ -5,7 +5,7 @@ import {
     BORRAR_OPERACIONES,
     OPERACION_ACTUAL,
     ERROR_OPERACIONES    
-} from '../types';
+} from '../../types';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state,action) => {
@@ -41,21 +41,6 @@ export default (state,action) => {
                 ...state,
                 mensaje: action.payload
             }
-        // case DEVOLVER_LIBRO :
-        //     return {
-        //         ...state,
-        //         libro: state.libros.filter(libro => libro.persona_id === action.payload),
-        //     }
-        // case PRESTAR_LIBRO :
-        //     return {
-        //         ...state,
-        //         libro: state.libros.filter(libro => libro.id === action.payload)
-        //     }
-        // case LIBRO_SIN_DATOS:
-        //     return {
-        //         ...state,
-        //         libroSeleccionado: null
-        //     }
         default: 
            return state;
     }

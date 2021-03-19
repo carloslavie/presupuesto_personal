@@ -2,7 +2,7 @@ import React, { Fragment, useState, useContext, useEffect } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import operacionesContext from '../context/operacionesContext';
+import operacionesContext from '../context/operaciones/operacionesContext';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const Operaciones = ({operation}) => {
 
     const { concepto, monto, fecha, tipo} = operation;
@@ -44,7 +43,6 @@ const Operaciones = ({operation}) => {
 
     const operacionContext = useContext(operacionesContext)
     const {operacionActual, obtenerOperaciones, actualizarOperaciones, eliminarOperacion, operacionSeleccionada} = operacionContext;
-
 
     const classes = useStyles();  
     const [modalStyle] = useState(getModalStyle);
@@ -79,6 +77,8 @@ const Operaciones = ({operation}) => {
       actualizarOperaciones(operacion);
       setOpen(false)
     }
+
+    //Eliminar operacion
     const operacionEliminar = id => {
       Swal.fire({
           title: 'Esta seguro que quiere eliminar esta operación?',   
@@ -98,10 +98,12 @@ const Operaciones = ({operation}) => {
             )}
         })
     }
+
+    //Modal para editar operacion
     const body = (
         <div style={modalStyle} className={classes.paper}>
           <div className="contenedor-form">
-                <h1>Editar Operación</h1>
+                <h3>Editar Operación</h3>
                 <form 
                     onSubmit={handleSubmit}
                     className="form"
@@ -122,14 +124,14 @@ const Operaciones = ({operation}) => {
                         type = "text"
                         name = "monto"
                         className = "u-full-width"
-                        placeholder = "Ej. Transporte"
+                        placeholder = "Ej. 300"
                         onChange = {actualizarEdicion}
                       />
                   </div>
-                  <div>
+                  <div className="col s12 right">
                     <input
                         type="submit"
-                        className="boton-submit"
+                        className="btn waves-effect waves-light btn-small btn-block #0277bd light-blue darken-3 accent-4 "
                         value="Guardar Cambios"/>
                   </div>
                 </form>
@@ -163,8 +165,7 @@ const Operaciones = ({operation}) => {
                     onClick={() => operacionEliminar(operation.id)}>
                     <DeleteIcon/>
                 </IconButton>
-            </td>
-            
+            </td>            
           </tr>                    
         </tbody>     
       </Fragment>
@@ -173,4 +174,3 @@ const Operaciones = ({operation}) => {
  
 export default Operaciones;
 
-//style={{ color: orange[900] }}
