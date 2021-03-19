@@ -7,7 +7,7 @@ import ListadoOperaciones from './components/ListadoOperaciones';
 import {BrowserRouter as Router  } from 'react-router-dom';
 import OperacionesState  from './context/operaciones/operacionesState';
 
-//import AlertaState from './context/alertas/alertaState';
+
 
 
 function App() {
@@ -17,11 +17,11 @@ function App() {
   const [ nuevoBalance, setnuevoBalance ] = useState();
   const [ nuevoOperaciones, setnuevoOperaciones ] = useState([]);
 
-  //Funcion para traer balance de balance
+  //Funcion para traer balance del componente balance
   const traerBalance = bal =>{
     setnuevoBalance(bal)
   }
-  //Funcion para traer operaciones de ListadoOperaciones
+  //Funcion para traer operaciones del componente ListadoOperaciones
   const traerOperaciones = oper =>{
       setnuevoOperaciones(oper)
   }
@@ -30,30 +30,23 @@ function App() {
     <Fragment>
       <OperacionesState>
         <Router>
-          {/* <Switch> */}
-            
-            {/* <Route exact path="/nueva-categoria" component={Formulario}/> */}
-            
-            <Header 
-                titulo = 'Control de Presupuesto'
-            />
-
-            <div className="container white">
+          <Header 
+              titulo = 'Control de Presupuesto'
+          />
+              <div className="contenedorppal">
               <Formulario
-                 nuevoBalance = {nuevoBalance}
+                  nuevoBalance = {nuevoBalance}
               />
               <ListadoOperaciones
-              traerOperaciones = {traerOperaciones}
+                  traerOperaciones = {traerOperaciones}
               />
               <Balance
-              traerBalance = {traerBalance}
-              nuevoOperaciones = {nuevoOperaciones}
-
+                  traerBalance = {traerBalance}
+                  nuevoOperaciones = {nuevoOperaciones}
               />
-            </div>
-            {/* </Switch> */}
-          </Router>
-        </OperacionesState> 
+              </div>            
+        </Router>
+      </OperacionesState> 
     </Fragment>
   );
 }

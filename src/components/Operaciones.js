@@ -4,7 +4,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import operacionesContext from '../context/operaciones/operacionesContext';
 
-
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Swal from 'sweetalert2';
@@ -34,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const Operaciones = ({operation}) => {
 
     const { concepto, monto, fecha, tipo} = operation;
@@ -45,7 +43,6 @@ const Operaciones = ({operation}) => {
 
     const operacionContext = useContext(operacionesContext)
     const {operacionActual, obtenerOperaciones, actualizarOperaciones, eliminarOperacion, operacionSeleccionada} = operacionContext;
-
 
     const classes = useStyles();  
     const [modalStyle] = useState(getModalStyle);
@@ -168,8 +165,7 @@ const Operaciones = ({operation}) => {
                     onClick={() => operacionEliminar(operation.id)}>
                     <DeleteIcon/>
                 </IconButton>
-            </td>
-            
+            </td>            
           </tr>                    
         </tbody>     
       </Fragment>

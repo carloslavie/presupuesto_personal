@@ -1,9 +1,6 @@
 import React, { useState, useContext, useEffect} from 'react';
 import operacionesContext from '../context/operaciones/operacionesContext';
 import Error from '../components/Error';
-import Balance from './Balance'
-
-
 
 
 const Formulario = ({nuevoBalance}) => {
@@ -14,7 +11,7 @@ const Formulario = ({nuevoBalance}) => {
     
     const [ operacion, guardarOperacion ] = useState({
         concepto : "",
-        monto : 0.00,
+        monto : 0,
         fecha: null,
         tipo: ""
 
@@ -25,29 +22,22 @@ const Formulario = ({nuevoBalance}) => {
     const handleonChange = e =>{
         guardarOperacion ({
             ...operacion,
-            [e.target.name] : e.target.value,
-            
+            [e.target.name] : e.target.value,            
         })
     }
     const handleonMonto = e =>{
         guardarOperacion ({
             ...operacion,
-            [e.target.name] : parseInt(e.target.value, 10),
-            
+            [e.target.name] : parseInt(e.target.value, 10),            
         })
     }
             
     const { concepto, monto, tipo } = operacion;
-
-    
-   
-
-    //Al realizar operacion
+  
+    //Al cargar operacion
     const handleOnSubmit = e =>{
         e.preventDefault();
-        let titerr = ""
         if(concepto.trim() === "" || monto <= 0 || tipo === ""){
-            titerr = "Campos obligatorios"
             actualizarError(true);
             return;
         }
@@ -65,18 +55,15 @@ const Formulario = ({nuevoBalance}) => {
             tipo: ""
             })
         }
-        // useEffect(() => {
-            
-        // }, [operacion])
-        
-
     return ( 
         <form
             onSubmit = {handleOnSubmit}
         >
-            <h3>Ingrese Operación</h3>
+            <h3 className="subtitulos">Ingrese Operación</h3>
 
-            { error ? <Error mensaje={"Los campos son obligatorios o el egreso es mayor al Balance"}/> : null } 
+            { error ? 
+            <Error mensaje="Los campos son obligatorios o el egreso es mayor al Balance"/> 
+            : null } 
 
             <div className = "">
                 <label>Concepto</label>
@@ -94,7 +81,6 @@ const Formulario = ({nuevoBalance}) => {
                 <label>Monto</label>
                 <input 
                     type = "number"
-                    //step="0.01"
                     name = "monto"
                     className = "u-full-width"
                     placeholder = "Ej. 300"
